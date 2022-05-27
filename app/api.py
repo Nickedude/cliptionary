@@ -4,10 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-    "localhost:3000"
-]
+origins = ["http://localhost:3000", "localhost:3000"]
 
 
 app.add_middleware(
@@ -15,7 +12,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 target = [""]
@@ -37,9 +34,7 @@ async def get_target() -> dict:
 @app.post("/target", tags=["target"])
 async def set_target(new_target: dict) -> dict:
     target[0] = new_target["target"]
-    return {
-        "data": {f"New target is {target[0]}"}
-    }
+    return {"data": {f"New target is {target[0]}"}}
 
 
 @app.post("/image", tags=["image"])
@@ -48,10 +43,12 @@ async def submit_image(submission: dict) -> str:
     images[user] = submission["image"]
     return "OK!"
 
+
 @app.post("/players", tags=["players"])
 async def add_player(submission: dict) -> str:
     players.add(submission["player"])
     return "OK!"
+
 
 @app.get("/players", tags=["players"])
 async def get_players() -> list:
