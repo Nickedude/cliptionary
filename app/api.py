@@ -18,7 +18,23 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+target = [""]
+
 
 @app.get("/", tags=["root"])
 async def read_root() -> dict:
     return {"message": "Welcome to your todo list."}
+
+
+@app.get("/target", tags=["target"])
+async def get_target() -> dict:
+    print(f"Getting target", flush=True)
+    return {"data": target[0]}
+
+
+@app.post("/target", tags=["target"])
+async def set_target(new_target: dict) -> dict:
+    target[0] = new_target["target"]
+    return {
+        "data": {f"New target is {target[0]}"}
+    }
