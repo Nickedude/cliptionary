@@ -20,6 +20,7 @@ app.add_middleware(
 
 target = [""]
 images = {}
+players = set()
 
 
 @app.get("/", tags=["root"])
@@ -46,3 +47,12 @@ async def submit_image(submission: dict) -> str:
     user = submission["user"]
     images[user] = submission["image"]
     return "OK!"
+
+@app.post("/players", tags=["players"])
+async def add_player(submission: dict) -> str:
+    players.add(submission["player"])
+    return "OK!"
+
+@app.get("/players", tags=["players"])
+async def get_players() -> list:
+    return list(players)
