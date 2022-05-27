@@ -11,7 +11,7 @@ function App() {
     <ChakraProvider>
       <Header />
       <Target />
-      <Canvas />
+      <Canvas user={"niklas"} />
     </ChakraProvider>
   )
 }

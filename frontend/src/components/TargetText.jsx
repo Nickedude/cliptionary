@@ -29,7 +29,6 @@ export default function Target() {
     const response = await fetch("http://localhost:8000/target")
     const target_response = await response.json()
     setTarget(target_response.data)
-    console.log("Returned" + target_response.data)
   }
 
   useEffect(() => {

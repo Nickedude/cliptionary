@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 target = [""]
+images = {}
 
 
 @app.get("/", tags=["root"])
@@ -38,3 +39,10 @@ async def set_target(new_target: dict) -> dict:
     return {
         "data": {f"New target is {target[0]}"}
     }
+
+
+@app.post("/image", tags=["image"])
+async def submit_image(submission: dict) -> str:
+    user = submission["user"]
+    images[user] = submission["image"]
+    return "OK!"
