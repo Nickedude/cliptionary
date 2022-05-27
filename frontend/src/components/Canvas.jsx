@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { ReactSketchCanvas } from 'react-sketch-canvas';
+import * as React from "react";
+import { ReactSketchCanvas } from "react-sketch-canvas";
 
 const styles = {
-  border: '0.0625rem solid #9c9c9c',
-  borderRadius: '0.25rem',
+  border: "0.0625rem solid #9c9c9c",
+  borderRadius: "0.25rem",
 };
 
 const Canvas = class extends React.Component {
@@ -13,18 +13,17 @@ const Canvas = class extends React.Component {
     this.canvas = React.createRef();
   }
 
-
-  handleSubmit (image) {
+  handleSubmit(image) {
     const submission = {
-      "image": image,
-      "user": this.props.user,
-    }
+      image: image,
+      user: this.props.user,
+    };
 
     fetch("http://localhost:8000/image", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(submission)
-    }).catch(e => console.log("Failed to submit image!" + e))
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(submission),
+    }).catch((e) => console.log("Failed to submit image!" + e));
   }
 
   render() {
@@ -42,19 +41,19 @@ const Canvas = class extends React.Component {
           onClick={() => {
             this.canvas.current
               .exportImage("png")
-              .then(data => {
+              .then((data) => {
                 this.handleSubmit(data);
               })
-              .catch(e => {
+              .catch((e) => {
                 console.log("Failed to submit image!");
               });
           }}
         >
-        Submit Image
+          Submit Image
         </button>
       </div>
     );
   }
-}
+};
 
 export default Canvas;
