@@ -4,12 +4,14 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import Header from "./components/Header";
 import Target from "./components/TargetText";
+import Canvas from "./components/Canvas";
 
 function App() {
   return (
     <ChakraProvider>
       <Header />
       <Target />
+      <Canvas />
     </ChakraProvider>
   )
 }
